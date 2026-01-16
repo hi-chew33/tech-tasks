@@ -1,0 +1,53 @@
+Challenge Description
+
+In this stage of the challenge, a single image file named heheheha.png was provided.
+At first glance, the file appeared to be a normal PNG image containing logos and stickers.
+Given the context of a CTF, it was assumed that the image contained hidden data using steganographic techniques.
+
+Tools Used
+
+Kali Linux
+
+zsteg (LSB steganography analysis tool)
+
+Terminal
+
+Initial Analysis
+
+The image was first inspected visually and showed no obvious anomalies.
+Basic checks such as metadata inspection and file structure analysis did not reveal any hidden information.
+
+The tool zsteg was chosen because it is specifically designed to detect hidden data in PNG and BMP images.
+
+The image was analyzed using the following command:
+
+zsteg heheheha.png
+
+
+zsteg systematically checked different color channels, bit planes, and pixel traversal orders.
+
+Key Finding
+
+Among the outputs produced by zsteg, the following line contained readable hidden text:
+
+b1,rgb,lsb,xy: text: "10-armykm1f3"
+
+
+This indicates that:
+
+b1: 1 bit per channel was used
+
+rgb: Data was hidden across the Red, Green, and Blue channels
+
+lsb: Least Significant Bit steganography was used
+
+xy: Pixels were read in standard row-wise order
+
+Conclusion
+
+The readable string extracted from the image represents the second fragment of the flag.
+The data was successfully hidden using LSB steganography within the RGB channels of the image.
+
+Flag Fragment
+part2 = 10-armykm1f3
+
