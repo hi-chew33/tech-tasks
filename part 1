@@ -1,0 +1,17 @@
+gdg_part1 
+
+Tools Used
+- Command Prompt
+- Notepad (encoding inspection)
+
+Approach
+The file `xotwod.txt` initially appeared to contain only song lyrics.
+However, certain characters displayed inconsistently, indicating an encoding or homoglyph trick.
+
+On closer inspection, the letter `e` in the word "there" was replaced with a Cyrillic `е`, which visually resembles the Latin character but differs in Unicode representation.
+
+Conclusion
+The repeated altered word highlighted the intended flag fragment.
+
+Flag Fragment
+part1 = there
