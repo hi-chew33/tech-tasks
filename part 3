@@ -1,0 +1,91 @@
+In Part 3 of the challenge, a compressed file named qr_code_zipbomb.rar was provided.
+The description suggested that the archive contained a very large number of QR codes, hinting at automation rather than manual scanning.
+
+The objective was to extract meaningful information (the third fragment of the flag) hidden among thousands of decoy QR codes.
+
+
+The archive size was small, but extraction revealed thousands of QR images.
+
+Manually opening and scanning each QR code was impractical.
+
+This indicated the use of a zipbomb-style noise attack, where most data is intentionally useless.
+
+Therefore, the correct approach was to automate QR scanning using Python.
+
+🛠 Tools & Environment
+
+Operating System: Windows
+
+Python Version: 3.11.8
+
+Tools Used:
+
+zipfile (built-in Python module)
+
+Pillow (image handling)
+
+pyzbar (QR decoding)
+
+Command Prompt (CMD)
+
+Step 1: Script Preparation
+
+A Python script was created to:
+
+Open the compressed archive directly
+
+Iterate through all image files
+
+Decode any QR code found
+
+Print the extracted content
+
+This avoided manual extraction and ensured safe processing of the zipbomb.
+
+
+The script was executed using:
+
+python read_qr.py
+
+
+During execution:
+
+The script scanned thousands of QR codes
+
+Most QR codes contained decoy messages, such as:
+
+“Keep scanning”
+
+“Nothing useful here”
+
+“Just a decoy”
+
+The output intentionally flooded the terminal with noise
+
+This behavior was expected and confirmed the challenge’s deceptive natur
+
+Amid the decoy output, one QR code produced a unique Base64-encoded string:
+
+PDwtLS0tcGFydDM9Z2cxb2x9LS0tLT4+
+
+
+This was the only non-decoy output.
+
+
+
+The extracted string was decoded from Base64:
+
+<!---part3=gg1ol}--->
+
+
+From this, the third fragment of the flag was identified as:
+
+gg1ol}
+
+
+Flag Fragment (Part 3):
+
+gg1ol}
+
+
+This fragment is intended to be combined with Part 1 and Part 2 from the earlier challenges to form the complete flag.
