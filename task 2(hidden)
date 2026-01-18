@@ -1,0 +1,17 @@
+This CTF challenge required examining an unfamiliar network service hosted on a private IP using a Kali Linux virtual machine running in VMware Workstation. During initial reconnaissance, several 
+open ports were discovered on the target system at 192.168.29.111. Early interaction attempts relied on common HTTP-based tools such as curl, but most ports responded with empty replies, indicating
+the service was not a typical web application. One port exposed a custom banner identifying itself as NRDP/2025.2.0.0, pointing toward a proprietary or nonstandard protocol.
+
+Further probing with OpenSSL revealed that port 35743 supported TLS connections, and a successful TLS 1.2 handshake could be established. However, the service did not display a conventional banner 
+and instead appeared to wait for direct user input. Manual commands like HELP, MENU, and FLAG produced incomplete or inconsistent outputs, suggesting that the service operated interactively. Attempts
+to script or automate interaction using piped input, printf, and tools such as ncat consistently failed, resulting in timeouts or no responses. This behavior indicated that the service likely
+required a genuine interactive terminal and was intentionally designed to reject non-interactive input, a common tactic in CTF challenges to prevent automation.
+
+To overcome this limitation, the OpenSSL client was executed through rlwrap to provide proper terminal and readline support. By using the command rlwrap openssl s_client
+-connect 192.168.29.111:35743 -tls1_2 -quiet, a stable interactive session was successfully established. Within this environment, issuing the FLAG command prompted a valid response from the server, 
+revealing the flag and confirming successful completion of the challenge.
+
+Other investigative approaches, such as filesystem inspection, browser-based testing, HTTP method enumeration, and analysis of mounted disk images, were deliberate distractions and yielded 
+no meaningful results. This reinforced that the intended solution centered on understanding and correctly interacting with the custom protocol rather than exploiting web services or extracting 
+stored data. Overall, the challenge emphasized practical skills in low-level service interaction, TLS-based socket communication, and the necessity of proper terminal handling when working
+with interactive network services.
